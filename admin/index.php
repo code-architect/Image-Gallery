@@ -2,31 +2,33 @@
 <?php include("includes/top_nav.php"); ?>
 <?php include("includes/side_nav.php") ?>
 
-<!-- Page Heading -->
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            Dashboard <small>Statistics Overview</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-dashboard"></i> Dashboard
-            </li>
-        </ol>
-    </div>
-</div>
+<?php
+if($_SERVER['REQUEST_URI'] == "/sand_box/image_gallery/admin/index.php" ||
+   $_SERVER['REQUEST_URI'] == "/sand_box/ecommerce_simple/public/admin/" )
+{
+    include("pages/main.php");                              // main page
+}
+elseif(isset($_GET['users']))                              // Users summery page
+{
+    include("pages/users.php");
+}
+elseif(isset($_GET['photos']))                              // Photos page
+{
+    include("pages/photos.php");
+}
+elseif(isset($_GET['upload']))                              // Upload page
+{
+    include("pages/upload.php");
+}
+elseif(isset($_GET['comments']))                            // Comments page
+{
+    include("pages/comments.php");
+}
+else
+{
+    include("pages/main.php");
+}
+?>
 <!-- /.row -->
-
-
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
 
 <?php include("includes/footer.php"); ?>
