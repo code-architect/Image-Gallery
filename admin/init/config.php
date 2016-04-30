@@ -6,6 +6,17 @@ if(!isset($_SESSION)){
 }
 
 
+//----------------------------| Database Constants |----------------------------------//
+
+defined("DB_HOST") || define("DB_HOST", "localhost");
+defined("DB_USER") || define("DB_USER", "root");
+defined("DB_PASS") || define("DB_PASS", "");
+defined("DB_NAME") || define("DB_NAME", "image_gallery");
+
+
+
+//------------------------------------| Paths |---------------------------------------//
+
 // Directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);
 
@@ -18,7 +29,9 @@ defined("CLASSES_DIR") || define("CLASSES_DIR", ROOT_PATH.DS."classes");
 // Pages Folder
 defined("PAGES_DIR") || define("PAGES_DIR", ROOT_PATH.DS."pages");
 
-//------------------------------------------------------------------------------------//
+
+
+//------------------------------------| Pages |---------------------------------------//
 
 // Pages Array
 // register your site pages here
