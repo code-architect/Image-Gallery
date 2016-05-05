@@ -17,8 +17,16 @@
 <!--            <a href="index.php?p=comments"><i class="fa fa-fw fa-edit"></i> Comments</a>-->
 <!--        </li>-->
         <?php foreach($site_pages as $page){ ?>
-            <li>
-                <a href="index.php?p=<?php echo $page; ?>"><i class="fa fa-fw fa-table"></i> <?php echo ucfirst($page); ?></a>
+            <li
+                <?php
+                if($page == $_GET['p']){
+                    echo 'class="active"';
+                }
+                ?>
+            >
+                <a href="index.php?p=<?php echo $page; ?>">
+                    <i class="fa fa-fw fa-table"></i> <?php echo ucfirst($page); ?>
+                </a>
             </li>
         <?php } ?>
 
