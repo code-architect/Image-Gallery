@@ -9,11 +9,11 @@ class Database {
     public function __construct()
     {
         // database connection
-        $connection = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $this->conn = $connection;
 
         // if error occurred
-        if(mysqli_connect_errno()){
+        if($this->conn->connect_errno){
             die("Database connection failed.");
         }
     }
@@ -29,7 +29,7 @@ class Database {
      */
     public function query($sql)
     {
-        $result = mysqli_query($this->conn, $sql);
+        $result = $this->conn->query($sql);
         $result = $this->confirm_query($result);
         return $result;
     }
@@ -37,7 +37,11 @@ class Database {
 
 //--------------------------------------------------------------------------------------//
 
-
+    /**
+     * @work If failed return error, if not return the result
+     * @param $result
+     * @return mixed
+     */
     private function confirm_query($result)
     {
         if(!$result){
@@ -60,5 +64,9 @@ class Database {
         $escaped_string = mysqli_real_escape_string($this->db, $string);
         return $escaped_string;
     }
+
+
+//--------------------------------------------------------------------------------------//
+
 
 }

@@ -19,8 +19,10 @@
         <?php foreach($site_pages as $page){ ?>
             <li
                 <?php
-                if($page == $_GET['p']){
-                    echo 'class="active"';
+                if(isset($_GET['p'])) {
+                    if ($page == $_GET['p']) {
+                        echo 'class="active"';
+                    }
                 }
                 ?>
             >
