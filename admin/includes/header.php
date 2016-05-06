@@ -8,8 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <?php
+    if($_SERVER['REQUEST_URI'] == "/sand_box/image_gallery/admin/index.php" ||
+        $_SERVER['REQUEST_URI'] == "/sand_box/image_gallery/admin/" )
+    {
+        echo "<title>Admin - Main</title>";
+    }
+    else if(isset($_GET['p'])){
+        if(in_array($_GET['p'], $site_pages))
+        {
+            echo "<title>Admin - ".ucfirst($_GET['p'])."</title>";
+        }
+        else
+        {
+            echo "<title>Admin - Main</title>";
+        }
+    }
+    ?>
 
-    <title>Admin - Dashboard</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="styles/css/bootstrap.min.css" rel="stylesheet">
