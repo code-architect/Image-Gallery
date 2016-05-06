@@ -3,7 +3,8 @@
 class Database {
 
     // connection variable
-    private $conn;
+    protected $conn;
+    protected $_query;
 
 
     public function __construct()
@@ -29,8 +30,9 @@ class Database {
      */
     public function query($sql)
     {
-        $result = $this->conn->query($sql);
-        $result = $this->confirm_query($result);
+        $this->_query = filter_var($sql,FILTER_SANITIZE_STRING);
+        $result = mysqli_query($this->conn, $this->_query);
+        $this->confirm_query($result);
         return $result;
     }
 
@@ -61,7 +63,7 @@ class Database {
      */
     public function mysql_escape($string)
     {
-        $escaped_string = mysqli_real_escape_string($this->db, $string);
+        $escaped_string = mysqli_real_escape_string($this->conn, $string);
         return $escaped_string;
     }
 

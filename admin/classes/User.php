@@ -4,11 +4,15 @@ class User extends Application{
 
 
 
-    public function find_all_users()
+    public function find_all_data($tableName)
     {
-        $query = "SELECT * FROM users";
-        $result = $this->db->result($query);
-        return $result;
+        $data = array();
+        $query = "SELECT * FROM ".$tableName;
+        $result = $this->db->query($query);
+        while($tableData = mysqli_fetch_assoc($result)) {
+            $data[] = $tableData;
+        }
+        return $data;
     }
 }
 
