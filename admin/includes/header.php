@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <?php
+    // Changing the title by page
     if($_SERVER['REQUEST_URI'] == "/sand_box/image_gallery/admin/index.php" ||
         $_SERVER['REQUEST_URI'] == "/sand_box/image_gallery/admin/" )
     {

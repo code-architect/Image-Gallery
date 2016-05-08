@@ -39,6 +39,24 @@ class Database {
 
 //--------------------------------------------------------------------------------------//
 
+
+    /**
+     * @work executes the query and return data
+     * @param $query
+     * @return array
+     */
+    public function execute_query($query)
+    {
+        $data = array();
+        $result = $this->conn->query($query);
+        while ($tableData = mysqli_fetch_assoc($result)) {
+            $data[] = $tableData;
+        }
+        return $data;
+    }
+
+//--------------------------------------------------------------------------------------//
+
     /**
      * @work If failed return error, if not return the result
      * @param $result
