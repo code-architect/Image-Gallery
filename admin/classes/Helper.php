@@ -27,5 +27,19 @@ class Helper{
     }
 
 
+    /**
+     * @work If there is not data in the data array return message
+     * @param $array
+     * @return string
+     */
+    public static function check_data_array($array)
+    {
+        if(empty($array)){
+            return "Sorry, Data Not Found!";
+        }else{
+            return $array;
+        }
+    }
+
 
 }
