@@ -1,7 +1,7 @@
 <?php
 class Application {
 
-    public $db;
+    protected $db;
 
     public function __construct() {
         $this->db = new Database();

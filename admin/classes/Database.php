@@ -2,9 +2,9 @@
 
 class Database {
 
-    // connection variable
-    protected $conn;
-    protected $_query;
+
+    protected $conn;    // connection variable
+    protected $_query;  // SQL query
 
 
     public function __construct()
@@ -34,6 +34,7 @@ class Database {
         $result = mysqli_query($this->conn, $this->_query);
         $this->confirm_query($result);
         return $result;
+
     }
 
 
@@ -49,10 +50,12 @@ class Database {
     {
         $data = array();
         $result = $this->conn->query($query);
-        while ($tableData = mysqli_fetch_assoc($result)) {
+
+        while ($tableData = $result->fetch_object()) {
             $data[] = $tableData;
         }
         return $data;
+
     }
 
 //--------------------------------------------------------------------------------------//
