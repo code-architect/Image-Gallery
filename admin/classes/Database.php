@@ -60,17 +60,18 @@ class Database {
 
 //--------------------------------------------------------------------------------------//
 
+
     /**
-     * @work If failed return error, if not return the result
-     * @param $result
-     * @return mixed
+     * @work Check if there are any rows returning
+     * @param $query
+     * @return bool
      */
-    private function confirm_query($result)
+    public function num_rows($query)
     {
-        if(!$result){
-            die("Query Failed");
-        }
-        return $result;
+        $this->_query = $this->mysql_escape($query);
+        $result = $this->conn->query($this->_query);
+        $num_rows = $result->num_rows;
+        return ($num_rows > 0)? true : false;
     }
 
 
@@ -86,6 +87,23 @@ class Database {
     {
         $escaped_string = mysqli_real_escape_string($this->conn, $string);
         return $escaped_string;
+    }
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work If failed return error, if not return the result
+     * @param $result
+     * @return mixed
+     */
+    private function confirm_query($result)
+    {
+        if(!$result){
+            die("Query Failed");
+        }
+        return $result;
     }
 
 
