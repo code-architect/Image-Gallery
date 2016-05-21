@@ -5,6 +5,7 @@ class User {
     private $tableName = 'users';   // Database table name
     private $db;                    // Database connection
 
+
     public function __construct() {
         $this->db = new Database();
     }
@@ -22,6 +23,7 @@ class User {
     }
 
 
+//--------------------------------------------------------------------------------------//
 
 
     /**
@@ -57,7 +59,24 @@ class User {
     }
 
 
+//--------------------------------------------------------------------------------------//
 
+
+    /**
+     * @work Check if user exists or not
+     * @param $id   :User id
+     * @return bool :Return true if exists
+     */
+    public function user_exists($id)
+    {
+        $query = "SELECT user_id FROm users WHERE user_id = ".$id;
+        $rows = $this->db->num_rows($query);
+        if($rows == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 
