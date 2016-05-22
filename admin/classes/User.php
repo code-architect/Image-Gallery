@@ -7,8 +7,10 @@ class User {
 
 
     public function __construct() {
+        // Instantiating the Database Class
         $this->db = new Database();
     }
+
 
     /**
      * fetch every thing from given table
