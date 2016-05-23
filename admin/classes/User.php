@@ -66,12 +66,12 @@ class User {
 
     /**
      * @work Check if user exists or not
-     * @param $id   :User id
-     * @return bool :Return true if exists
+     * @param $user_id
+     * @return bool
      */
-    public function user_exists($id)
+    public function user_exists($user_id)
     {
-        $query = "SELECT user_id FROm users WHERE user_id = ".$id;
+        $query = "SELECT user_id FROM ".$this->tableName." WHERE user_id = ".$user_id;
         $rows = $this->db->num_rows($query);
         if($rows == true){
             return true;
@@ -81,6 +81,27 @@ class User {
     }
 
 
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work Get user id by user_name and password
+     * @param $user_name
+     * @param $user_password
+     * @return mixed
+     */
+
+    public function fetch_user_id($user_name, $user_password)
+    {
+        $user_name = Helper::escape_string($this->db->mysql_escape($user_name));
+        $user_password = md5(Helper::escape_string($this->db->mysql_escape($user_password)));
+
+        $query = "SELECT user_id, user_is_admin FROM ".$this->tableName." WHERE user_name = '{$user_name}' AND
+                  user_password = '{$user_password}'";
+
+        $data = $this->db->execute_query($query);
+        return !empty($data) ? array_shift($data) : false;
+    }
 
 
 }

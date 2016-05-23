@@ -33,15 +33,51 @@ class Session{
 
 //--------------------------------------------------------------------------------------//
 
-
-    public function login()
+    /**
+     * @work To check if signed_in is true or not
+     * @return bool
+     */
+    public function is_signed_in()
     {
-
+        return $this->signed_in;
     }
 
 
 //--------------------------------------------------------------------------------------//
 
+
+    /**
+     * @work Logging in your by user id
+     * @param $user
+     */
+    public function login($user)
+    {
+        if($user)
+        {
+            $this->user_id = $_SESSION['user_id'] = $user->user_id;
+            $_SESSION['is_admin'] = $user->user_is_admin;
+            $this->signed_in = true;
+        }
+    }
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work Destroy all session and unset values
+     */
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($this->user_id);
+        $this->signed_in = false;
+        session_destroy();
+    }
+//--------------------------------------------------------------------------------------//
+
+
 }
 
 $session = new Session();
+

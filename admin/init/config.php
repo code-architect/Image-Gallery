@@ -3,6 +3,7 @@
 //checking session is open or not
 if(!isset($_SESSION)){
     session_start();
+    ob_start();
 }
 
 
