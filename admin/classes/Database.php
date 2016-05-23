@@ -110,4 +110,18 @@ class Database {
 //--------------------------------------------------------------------------------------//
 
 
+    /**
+     * @work Find Data using custom query
+     * @param $query
+     * @return array
+     */
+    public function custom_query($query)
+    {
+        $this->_query = $this->mysql_escape($query);
+        $data = $this->execute_query($this->_query);
+        return $data;
+    }
+
+
+//--------------------------------------------------------------------------------------//
 }

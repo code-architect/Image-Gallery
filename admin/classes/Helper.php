@@ -42,4 +42,14 @@ class Helper{
     }
 
 
+    /**
+     * @work redirect user to desired page
+     * @param $page Location page
+     */
+    public static function redirect($page)
+    {
+        header("Location: ".$page);
+    }
+
+
 }
