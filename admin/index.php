@@ -4,6 +4,18 @@
 <?php include("includes/side_nav.php") ?>
 
 <?php
+$session = new Session();
+
+ //check if user is signed in
+if(!$session->is_signed_in())
+{
+    Helper::redirect("login.php");
+}
+//session_destroy();
+?>
+
+
+<?php
 if($_SERVER['REQUEST_URI'] == "/sand_box/image_gallery/admin/index.php" ||
    $_SERVER['REQUEST_URI'] == "/sand_box/image_gallery/admin/" )
 {
