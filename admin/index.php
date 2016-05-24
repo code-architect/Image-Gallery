@@ -11,6 +11,10 @@ if(!$session->is_signed_in())
 {
     Helper::redirect("login.php");
 }
+//check if user is admin or not
+elseif($_SESSION['is_admin'] == 0){
+    Helper::redirect("../index.php");
+}
 //session_destroy();
 ?>
 

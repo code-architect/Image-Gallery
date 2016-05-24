@@ -30,6 +30,7 @@ if(isset($_POST['submit']))
 
 
 } else {
+    $the_message = "";
     $username = "";
     $password = "";
 }
@@ -43,12 +44,12 @@ if(isset($_POST['submit']))
 <div class="col-md-2 "></div>
 
 <div class="col-md-4">
-    <h4><?php if(isset($the_message)){echo $the_message;} ?></h4>
+    <h4 class="bg-danger" style="padding: 1pc"><?php if(isset($the_message)){echo $the_message;} ?></h4>
     <form action="" method="post">
 
         <div class="form-group">
             <label style="color: #ffffff" for="username">Username</label>
-            <input type="text" class="form-control" name="username" required=""/>
+            <input type="text" class="form-control" value="<?php echo htmlentities($username); ?>" name="username" required=""/>
         </div>
 
         <div class="form-group">
