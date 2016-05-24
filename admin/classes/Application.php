@@ -1,10 +1,12 @@
 <?php
 class Application {
 
-    protected $db;
+    public $user;
+
 
     public function __construct() {
-        $this->db = new Database();
+        $this->user = new User();
+
     }
 
 }

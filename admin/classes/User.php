@@ -81,8 +81,9 @@ class User {
     }
 
 
-//--------------------------------------------------------------------------------------//
 
+
+//--------------------------------------------------------------------------------------//
 
     /**
      * @work Get user id by user_name and password
@@ -104,4 +105,48 @@ class User {
     }
 
 
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work Create user
+     * @param array $rows
+     * @return string
+     */
+    public function create($rows = array())
+    {
+        $val = [];
+        // check if given array is not empty
+        if(!empty($rows)){
+
+            // Getting the fields and the values
+            $fields = array_keys($rows);
+            $data = array_values($rows);
+
+
+            // cleaning data given by user
+            foreach($data as $values){
+                $val[] = Helper::escape_string($this->db->mysql_escape($values));
+            }
+
+            // Building query
+            $query = "INSERT INTO ".$this->tableName." (";
+            $query .= implode(", ", $fields);
+            $query .= ") VALUES ('";
+            $query .= implode("', '", $val);
+            $query .= "')";
+
+            if($this->db->custom_query($query))
+            {
+                return true;
+            } else {
+                return false;
+            }
+
+
+        }else{
+            return "No Data Found";
+        }
+    }
 }
+

@@ -101,7 +101,7 @@ class Database {
     private function confirm_query($result)
     {
         if(!$result){
-            die("Query Failed");
+            die($this->conn->error);
         }
         return $result;
     }
@@ -111,15 +111,17 @@ class Database {
 
 
     /**
-     * @work Find Data using custom query
+     * @work custom query
      * @param $query
      * @return array
      */
     public function custom_query($query)
     {
-        $this->_query = $this->mysql_escape($query);
-        $data = $this->execute_query($this->_query);
-        return $data;
+        $result = mysqli_query($this->conn, $query);
+        if(!$result){
+            die($this->conn->error);
+        }
+        return $result;
     }
 
 

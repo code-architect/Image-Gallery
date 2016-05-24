@@ -44,7 +44,7 @@ if(isset($_POST['submit']))
 <div class="col-md-2 "></div>
 
 <div class="col-md-4">
-    <h4 class="bg-danger" style="padding: 1pc"><?php if(isset($the_message)){echo $the_message;} ?></h4>
+    <h4 class="bg-danger"><?php if(isset($the_message)){echo $the_message;} ?></h4>
     <form action="" method="post">
 
         <div class="form-group">

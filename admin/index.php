@@ -5,6 +5,7 @@
 
 <?php
 $session = new Session();
+$app = new Application();
 
  //check if user is signed in
 if(!$session->is_signed_in())
