@@ -109,9 +109,9 @@ class User {
 
 
     /**
-     * @work Create user
+     * @work Create user from given array [array can be associative or numeric]
      * @param array $rows
-     * @return string
+     * @return bool
      */
     public function create($rows = array())
     {
@@ -119,23 +119,42 @@ class User {
         // check if given array is not empty
         if(!empty($rows)){
 
-            // Getting the fields and the values
-            $fields = array_keys($rows);
-            $data = array_values($rows);
+            // check if the given array is associative or not
+            if(Helper::isAssoc($rows)) {
+
+                // Getting the fields and the values
+                $fields = array_keys($rows);
+                $data = array_values($rows);
 
 
-            // cleaning data given by user
-            foreach($data as $values){
-                $val[] = Helper::escape_string($this->db->mysql_escape($values));
+                // cleaning data given by user
+                foreach ($data as $values) {
+                    $val[] = Helper::html_entity(Helper::escape_string($this->db->mysql_escape($values)));
+                }
+
+                // Building query
+                $query = "INSERT INTO " . $this->tableName . " (";
+                $query .= implode(", ", $fields);
+                $query .= ") VALUES ('";
+                $query .= implode("', '", $val);
+                $query .= "')";
+            }
+            else
+            {
+                // cleaning data given by user
+                foreach ($rows as $row) {
+                    $val[] = Helper::html_entity(Helper::escape_string($this->db->mysql_escape($row)));
+                }
+
+                // Building query
+                $query = "INSERT INTO " . $this->tableName . " (";
+                $query .= "user_name, user_password, user_email, user_fname, user_lname, user_is_admin";
+                $query .= ") VALUES ('";
+                $query .= implode("', '", $val);
+                $query .= "')";
             }
 
-            // Building query
-            $query = "INSERT INTO ".$this->tableName." (";
-            $query .= implode(", ", $fields);
-            $query .= ") VALUES ('";
-            $query .= implode("', '", $val);
-            $query .= "')";
-
+            // If query execute return true, else false
             if($this->db->custom_query($query))
             {
                 return true;
@@ -143,10 +162,41 @@ class User {
                 return false;
             }
 
-
         }else{
-            return "No Data Found";
+            // return false if the array is empty
+            return false;
+        }
+    }// create method
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    public function update($rows = array())
+    {
+        $val = [];
+
+        // check if given array is not empty
+        if(!empty($rows))
+        {
+            // check if the given array is associative or not
+            if(Helper::isAssoc($rows))
+            {
+                // do something
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            // return false if the array is empty
+            return false;
         }
     }
+
+
+
 }
 

@@ -5,6 +5,8 @@
 
 <?php
 $session = new Session();
+
+// to use all the instances
 $app = new Application();
 
  //check if user is signed in
