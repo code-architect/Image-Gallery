@@ -15,6 +15,7 @@ class Helper{
 
 
 
+
     /**
      * @work html special chars_decode
      * @param $string
@@ -25,6 +26,31 @@ class Helper{
         $new_string = htmlspecialchars_decode($string);
         return $new_string;
     }
+
+
+    /**
+     * @work Encode Html entities
+     * @param $string
+     * @return string
+     */
+    public static function html_entity($string)
+    {
+        $new_string = htmlentities($string);
+        return $new_string;
+    }
+
+
+    /**
+     * @work decode Html entities
+     * @param $string
+     * @return string
+     */
+    public static function html_entity_decode($string)
+    {
+        $new_string = html_entity_decode($string);
+        return $new_string;
+    }
+
 
 
     /**
@@ -49,6 +75,17 @@ class Helper{
     public static function redirect($page)
     {
         header("Location: ".$page);
+    }
+
+
+    /**
+     * @work To check if an array is associative or not
+     * @param $arr
+     * @return bool
+     */
+    public static function isAssoc($arr)
+    {
+        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
 
