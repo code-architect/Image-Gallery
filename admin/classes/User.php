@@ -184,7 +184,9 @@ class User {
     }// create method
 
 
+
 //--------------------------------------------------------------------------------------//
+
 
 
     /**
@@ -198,6 +200,7 @@ class User {
     {
         $val = [];
         $string = [];
+        $id = $this->db->mysql_escape($id);
 
         // check if given array is not empty
         if(!empty($rows))
@@ -248,6 +251,83 @@ class User {
             return false;
         }
     }
+
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work        Delete User
+     * @param $id   The user id to be deleted
+     * @return bool Return true if executes
+     */
+    public function delete($id)
+    {
+        $id = $this->db->mysql_escape($id);
+
+        // Building Query
+        $query = "DELETE FROM ".$this->tableName." WHERE user_id = ".$id." LIMIT 1";
+
+        // Check if the user exists before updating the table
+        if($this->user_exists($id)) {
+
+            // If query execute return true, else false
+            if ($this->db->custom_query($query)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
+
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work                Update or Create User
+     * @param array $array
+     * @param null $field
+     * @param null $id
+     * @return bool
+     */
+    public function save($array = array(), $field = null, $id = null)
+    {
+        // escape mysql injection
+        $id = $this->db->mysql_escape($id);
+
+        // Check if there are fields and id exists
+        if($field != null && $id != null)
+        {
+            // If the user exists
+            if($this->user_exists($id))
+            {
+                return $result = $this->update($array, $field, $id); // Update user
+            }
+
+        }
+        // check if both fields are null to create user
+        elseif($field == null && $id == null)
+        {
+            return $result = $this->create($array);                  // Create user
+        }
+        // if any of the fields are not null
+        elseif($field == null || $id == null)
+        {
+            return false;                                           // return false
+        }
+    }
+
+
+
+
+
+
+
 
 
 
