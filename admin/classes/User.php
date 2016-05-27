@@ -109,34 +109,49 @@ class User {
 
 
     /**
-     * @work Create user from given array [array can be associative or numeric]
-     * @param array $rows
-     * @return bool
+     * @work                Create user from given array [array can be associative or numeric]
+     * @param array $rows   Data Array
+     * @return bool         Return true if executes
      */
     public function create($rows = array())
     {
         $val = [];
+        $new_row = [];
         // check if given array is not empty
         if(!empty($rows)){
 
             // check if the given array is associative or not
             if(Helper::isAssoc($rows)) {
 
+                // Excluding unnecessary fields
+                foreach($rows as $key => $value){
+                    if(strpos($key, 'user_') !== false)
+                    {
+                        unset($val['user_id']);         // Removing user_is
+                        $val[$key] = $value;
+                    }
+
+                    // Encrypt the password
+                    if($key == 'user_password'){
+                        $val[$key] = md5($value);
+                    }
+                }
+
                 // Getting the fields and the values
-                $fields = array_keys($rows);
-                $data = array_values($rows);
+                $fields = array_keys($val);
+                $data = array_values($val);
 
 
                 // cleaning data given by user
                 foreach ($data as $values) {
-                    $val[] = Helper::html_entity(Helper::escape_string($this->db->mysql_escape($values)));
+                    $new_row[] = Helper::html_entity(Helper::escape_string($this->db->mysql_escape($values)));
                 }
 
                 // Building query
                 $query = "INSERT INTO " . $this->tableName . " (";
                 $query .= implode(", ", $fields);
                 $query .= ") VALUES ('";
-                $query .= implode("', '", $val);
+                $query .= implode("', '", $new_row);
                 $query .= "')";
             }
             else
@@ -172,9 +187,17 @@ class User {
 //--------------------------------------------------------------------------------------//
 
 
-    public function update($rows = array())
+    /**
+     * @work                Update the existing table
+     * @param array $rows   Data Array
+     * @param $field        Where condition field
+     * @param $id           Where condition data
+     * @return bool         Return true if executes
+     */
+    public function update($rows = array(), $field, $id)
     {
         $val = [];
+        $string = [];
 
         // check if given array is not empty
         if(!empty($rows))
@@ -182,12 +205,42 @@ class User {
             // check if the given array is associative or not
             if(Helper::isAssoc($rows))
             {
-                // do something
-            }
-            else
-            {
+                // Excluding unnecessary fields
+                foreach($rows as $key => $value){
+                    if(strpos($key, 'user_') !== false)
+                    {
+                        unset($val['user_id']);         // Removing user_is
+                        $val[$key] = $value;
+                    }
+                }
 
+                // Building Query
+                $query = "UPDATE ".$this->tableName." SET ";
+
+                // Getting the field and data
+                foreach($val as $key => $value)
+                {
+                    // escaping values and putting them in an array
+                    $string[] = $key." = '".Helper::html_entity(Helper::escape_string($this->db->mysql_escape($value)))."'";
+                }
+
+                $query .= implode(", ", $string);
+                $query .= " WHERE ".$field." = ".$id;
+                // Building Query Ends
             }
+
+            // Check if the user exists before updating the table
+            if($this->user_exists($id))
+            {
+                // If query execute return true, else false
+                if($this->db->custom_query($query))
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
         }
         else
         {

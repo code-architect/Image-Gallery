@@ -66,13 +66,24 @@
 
 // Create user
 //$arr = [
-//    'user_name' => "jenny",
+//    'user_name' => "Jenny",
 //    'user_password' => "123456",
 //    'user_email' => "abcx@xyz.com",
 //    'user_fname' => "jenny",
 //    'user_lname' => "doe",
 //    'user_is_admin' => "0"
 //];
+
+
+//$arr3 = [
+//    'user_name' => "jenny",
+//    'user_password' => "",
+//    'user_email' => "",
+//    'user_fname' => "",
+//    'user_lname' => "",
+//    'user_is_admin' => ""
+//];
+
 //
 //// Converting password
 //foreach($arr as $key => $value){
@@ -81,13 +92,117 @@
 //    }
 //}
 //
-//echo "<pre>";
-//print_r($arr);
-//echo "<br>";
-//print_r($app->user->create($arr));
+
 //
+//echo "<pre>";
+//print_r($val);
+//if(Helper::isAssoc($arr3)){
+//    print_r($app->user->create($arr3));
+//}else{
+//    echo "Fuck Off";
+//}
+//echo "<br>";
+
+//print_r($app->user->create($arr));
+
+/**
+ * Numeric array convertion process
+ */
+/*
+$arr2 = [
+    "Jenny",
+    "gslkg'nrs'",
+    "",
+    "",
+    "",
+    ""
+];
+
+$arr4 = (object) $arr2;
+
+echo "<pre>";
+print_r($arr4);
 
 
+$obj = (object)$arr2;
+$a = (array)$obj;
+
+var_dump($a['0']); // OK!
+echo "<br>";
+print_r($arr4);
+*/
+
+/**
+ * Getting select ted fields from array
+ */
+//$new_arr = [];
+//$query = "";
+//
+//$arr = [
+//    'user_id'   => "1",
+//    'user_name' => "John",
+//    'user_password' => "123456",
+//    'user_email' => "abcx@xyz.com",
+//    'user_fname' => "John",
+//    'user_lname' => "Wick",
+//    'user_is_admin' => "0",
+//    'this_is'   => "Not wanted",
+//    'also_not'  => "wanted ok"
+//];
+
+//foreach($arr as $key => $value){
+//    if(strpos($key, 'user_') !== false)
+//    {
+//        unset($new_arr['user_id']);
+//        $new_arr[$key] = $value;
+//    }
+//}
+//
+//echo "<pre>";
+//print_r($new_arr);
+//echo "</pre>";
+//
+//$string = [];
+//
+//$query = "UPDATE employees ";
+//foreach($new_arr as $key => $value)
+//{
+//    $string[] = $key." = '".Helper::escape_string($value)."', ";
+//}
+//
+//$query .= implode("", $string);
+//echo "<pre>";
+//echo $query;
+
+//
+//$arr2 = [
+//    "Jenny",
+//    "gslkg'nrs'",
+//    "",
+//    "",
+//    "",
+//    ""
+//];
+//
+//$arr4 = (object) $arr2;
+//
+//echo "<pre>";
+//print_r($arr4);
+//
+//
+//$obj = (object)$arr2;
+//$a = (array)$obj;
+//
+//var_dump($a['0']); // OK!
+//echo "<br>";
+//print_r($arr4);
+
+
+
+//$st = $app->user->create($arr);
+//$st = $app->user->update($arr, 'user_id', 5);
+
+echo $st;
 ?>
 
 
