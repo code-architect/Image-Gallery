@@ -2,8 +2,8 @@
 class User {
 
 
-    private $tableName = 'users';   // Database table name
-    private $db;                    // Database connection
+    protected $tableName = 'users';   // Database table name
+    protected $db;                    // Database connection
 
 
     public function __construct() {
@@ -109,7 +109,7 @@ class User {
 
 
     /**
-     * @work                Create user from given array [array can be associative or numeric]
+     * @work                Insert into user table from given array
      * @param array $rows   Data Array
      * @return bool         Return true if executes
      */
@@ -124,14 +124,13 @@ class User {
             if(Helper::isAssoc($rows)) {
 
                 // Excluding unnecessary fields
-                foreach($rows as $key => $value){
-                    if(strpos($key, 'user_') !== false)
-                    {
-                        unset($val['user_id']);         // Removing user_is
-                        $val[$key] = $value;
-                    }
+                $val = Helper::excluding_fields($rows, 'user_', ['user_id']);
 
-                    // Encrypt the password
+                // Encrypt the password
+                foreach($val as $key => $value)
+                {
+                    $val[$key] = $value;
+
                     if($key == 'user_password'){
                         $val[$key] = md5($value);
                     }
@@ -143,30 +142,10 @@ class User {
 
 
                 // cleaning data given by user
-                foreach ($data as $values) {
-                    $new_row[] = Helper::html_entity(Helper::escape_string($this->db->mysql_escape($values)));
-                }
+                $new_row = $this->db->clean_array($data);
 
                 // Building query
-                $query = "INSERT INTO " . $this->tableName . " (";
-                $query .= implode(", ", $fields);
-                $query .= ") VALUES ('";
-                $query .= implode("', '", $new_row);
-                $query .= "')";
-            }
-            else
-            {
-                // cleaning data given by user
-                foreach ($rows as $row) {
-                    $val[] = Helper::html_entity(Helper::escape_string($this->db->mysql_escape($row)));
-                }
-
-                // Building query
-                $query = "INSERT INTO " . $this->tableName . " (";
-                $query .= "user_name, user_password, user_email, user_fname, user_lname, user_is_admin";
-                $query .= ") VALUES ('";
-                $query .= implode("', '", $val);
-                $query .= "')";
+                $query = $this->db->insert_query($this->tableName, $fields, $new_row);
             }
 
             // If query execute return true, else false
@@ -209,27 +188,10 @@ class User {
             if(Helper::isAssoc($rows))
             {
                 // Excluding unnecessary fields
-                foreach($rows as $key => $value){
-                    if(strpos($key, 'user_') !== false)
-                    {
-                        unset($val['user_id']);         // Removing user_is
-                        $val[$key] = $value;
-                    }
-                }
+                $val = Helper::excluding_fields($rows, 'user_', ['user_id']);
 
                 // Building Query
-                $query = "UPDATE ".$this->tableName." SET ";
-
-                // Getting the field and data
-                foreach($val as $key => $value)
-                {
-                    // escaping values and putting them in an array
-                    $string[] = $key." = '".Helper::html_entity(Helper::escape_string($this->db->mysql_escape($value)))."'";
-                }
-
-                $query .= implode(", ", $string);
-                $query .= " WHERE ".$field." = ".$id;
-                // Building Query Ends
+                $query = $this->db->update_query($this->tableName, $val, $field, $id);
             }
 
             // Check if the user exists before updating the table
@@ -258,16 +220,17 @@ class User {
 
 
     /**
-     * @work        Delete User
-     * @param $id   The user id to be deleted
-     * @return bool Return true if executes
+     * @work            Delete User
+     * @param $field    condition field
+     * @param $id       Where condition data
+     * @return bool     Return true if executes
      */
-    public function delete($id)
+    public function delete($field, $id)
     {
         $id = $this->db->mysql_escape($id);
 
         // Building Query
-        $query = "DELETE FROM ".$this->tableName." WHERE user_id = ".$id." LIMIT 1";
+        $query = $this->db->delete_query($this->tableName, $field, $id);
 
         // Check if the user exists before updating the table
         if($this->user_exists($id)) {
@@ -326,9 +289,12 @@ class User {
 
 
 
+//--------------------------------------------------------------------------------------//
 
-
-
+public function test($tableName, $array = [], $field, $id)
+{
+    return $st = $this->db->update_query($tableName, $array, $field, $id);
+}
 
 
 }

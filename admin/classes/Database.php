@@ -90,6 +90,44 @@ class Database {
     }
 
 
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work It will clean array not matter what the type associative or numeric
+     * @param array $array
+     * @return array
+     */
+    public function clean_array($array = array())
+    {
+        $clean_array = [];
+
+        // if the given array is not empty
+        if(Helper::check_data_array($array))
+        {
+            // if the array is associative array do this
+            if(Helper::isAssoc($array))
+            {
+                foreach($array as $key => $value)
+                {
+                    $clean_array[$key]  = Helper::html_entity(Helper::escape_string($this->mysql_escape($value)));
+                }
+            }
+            else    // Do this if numeric array
+            {
+                foreach ($array as $value) {
+                    $clean_array[] = Helper::html_entity(Helper::escape_string($this->mysql_escape($value)));
+                }
+            }
+        }
+
+        // Return clean array
+        return $clean_array;
+    }
+
+
+
 //--------------------------------------------------------------------------------------//
 
 
@@ -122,6 +160,72 @@ class Database {
             die($this->conn->error);
         }
         return $result;
+    }
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work Building the Create Query by given Data
+     * @param $tableName        The table name to be inserted
+     * @param array $fields     This is a numeric array of fields E.g:Array ( [0] => user_id [1] => user_name [2] => user_password )
+     * @param array $values     This is a numeric array of Values E.g: Array ( [0] => 1 [1] => user [2] => 123456 )
+     * @return string           Return the query string
+     */
+    public function insert_query($tableName, $fields = array(), $values = array())
+    {
+        $query = "INSERT INTO " . $tableName . " (";
+        $query .= implode(", ", $fields);
+        $query .= ") VALUES ('";
+        $query .= implode("', '", $values);
+        $query .= "')";
+
+        return $query;
+    }
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @param $tableName    The table name to be updated
+     * @param array $array  This is an associative array E.g: Array ( [user_id] => 1 [user_name] => nico [user_password] => 123456 )
+     * @param $field        The condition field E.g: user_id
+     * @param $id           The condition value E.g: 1
+     * @return string       Return the query string
+     */
+    public function update_query($tableName, $array = array(), $field, $id)
+    {
+        $string = [];
+        $query = "UPDATE ". $tableName." SET ";
+
+        // Getting the field and data
+        foreach($array as $key => $value)
+        {
+            // escaping values and putting them in an array
+            $string[] = $key." = '".Helper::html_entity(Helper::escape_string($this->mysql_escape($value)))."'";
+        }
+
+        $query .= implode(", ", $string);
+        $query .= " WHERE ".$field." = ".$id;
+
+        return $query;
+    }
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @param $tableName    The table name to be deleted
+     * @param $field        The condition field E.g: user_id
+     * @param $id           The condition value E.g: 1
+     * @return string       Return the query string
+     */
+    public function delete_query($tableName, $field, $id)
+    {
+        return $query = "DELETE FROM ".$tableName." WHERE ".$field." = ".$id." LIMIT 1";
     }
 
 
