@@ -2,6 +2,8 @@
 
 class Helper{
 
+
+
     /**
      * @work Convert special characters to HTML entities
      * @param $string
@@ -12,7 +14,6 @@ class Helper{
         $new_string = htmlspecialchars($string);
         return $new_string;
     }
-
 
 
 
@@ -54,14 +55,14 @@ class Helper{
 
 
     /**
-     * @work If there is not data in the data array return message
+     * @work If there is not data in the data array return false
      * @param $array
      * @return string
      */
     public static function check_data_array($array)
     {
         if(empty($array)){
-            return "Sorry, Data Not Found!";
+            return false;
         }else{
             return $array;
         }
@@ -78,6 +79,7 @@ class Helper{
     }
 
 
+
     /**
      * @work To check if an array is associative or not
      * @param $arr
@@ -87,6 +89,53 @@ class Helper{
     {
         return array_keys($arr) !== range(0, count($arr) - 1);
     }
+
+
+
+//--------------------------------------------------------------------------------------//
+
+
+
+    /**
+     * @work Creating an associative array by adding fields and removing unwanted fields
+     * @param array $rows   Given array
+     * @param $rule         given rule. E.g: 'user_' or 'photo_' add every fields contains this prefix or suffix
+     * @param array $fields given fields E.g: unset ['user_id', 'user_password'] etc.
+     * @return array        return cleared array
+     */
+    public static function excluding_fields($rows = array(), $rule, $fields = array())
+    {
+        $val = [];
+
+        foreach($rows as $key => $value){
+
+            // checking the given rule, and putting values in the array
+            if(strpos($key, $rule) !== false)
+            {
+                //un-setting by the given fields array
+                foreach($fields as $field) {
+                    unset($val[$field]);         // Removing this field
+                    $val[$key] = $value;
+                }
+            }
+        }
+        // returning the array
+        return $val;
+    }
+
+
+
+
+//--------------------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
+
 
 
 }
