@@ -223,9 +223,9 @@ class Database {
      * @param $id           The condition value E.g: 1
      * @return string       Return the query string
      */
-    public function delete_query($tableName, $field, $id)
+    public function delete_query($tableName, $field, $id, $whereCondition)
     {
-        return $query = "DELETE FROM ".$tableName." WHERE ".$field." = ".$id." LIMIT 1";
+        return $query = "DELETE FROM ".$tableName." WHERE ".$field." ".$whereCondition." ".$id." LIMIT 1";
     }
 
 
