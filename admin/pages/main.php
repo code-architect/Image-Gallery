@@ -16,15 +16,15 @@
 <?php
 //echo "<pre>";
 //print_r(get_included_files());
-
+//
 //$user = new User();
 //$data = $user->user_exists('user_id',1);
 //if($data == true) {
-//    $data = $user->fetch_selected_users(['user_name,user_fname'],'user_id','=','1','1');
+//    $data = $user->fetch_selected_column(['user_name,user_fname'],'user_id','=','12','1');
 //}else{
 //    $data = "Sorry.User Not Found!";
 //}
-//
+////
 //echo "<pre>";
 //print_r($data);
 //echo $data->user_name;
@@ -137,18 +137,34 @@ print_r($arr4);
  */
 //$new_arr = [];
 //$query = "";
-//
+
+
 //$arr = [
 //    'user_id'   => "1",
-//    'user_name' => "John",
+//    'user_name' => "nico",
 //    'user_password' => "123456",
 //    'user_email' => "abcx@xyz.com",
-//    'user_fname' => "John",
-//    'user_lname' => "Wick",
+//    'user_fname' => "nico",
+//    'user_lname' => "Robin",
 //    'user_is_admin' => "0",
 //    'this_is'   => "Not wanted",
 //    'also_not'  => "wanted ok"
 //];
+//
+//
+//$val = Helper::excluding_fields($arr, 'user_', ['user_id']);
+
+//$arr2 = [
+//    "Jenny",
+//    "gslkg'nrs'",
+//    "",
+//    "",
+//    "",
+//    ""
+//];
+
+//$val = $app->user->update($arr, 'user_id', 14);
+
 
 //foreach($arr as $key => $value){
 //    if(strpos($key, 'user_') !== false)
@@ -174,16 +190,7 @@ print_r($arr4);
 //echo "<pre>";
 //echo $query;
 
-//
-//$arr2 = [
-//    "Jenny",
-//    "gslkg'nrs'",
-//    "",
-//    "",
-//    "",
-//    ""
-//];
-//
+
 //$arr4 = (object) $arr2;
 //
 //echo "<pre>";
@@ -197,13 +204,14 @@ print_r($arr4);
 //echo "<br>";
 //print_r($arr4);
 
-
-
 //$st = $app->user->create($arr);
 //$st = $app->user->update($arr, 'user_id', 5);
-
-echo $st;
-?>
+//$st = $app->user->save($arr);
+//$val = $app->user->find_all();
+//$val = $app->user->delete('user_id', '14', '=');
+//echo "<pre>";
+//print_r($val);
+//echo "</pre>";
 
 
 

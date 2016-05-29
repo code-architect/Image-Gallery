@@ -1,8 +1,8 @@
 <?php
 
-class Photo extends User {
+class Photo extends DBObject {
 
-    protected $tableName = 'photo';
+    protected $tableName = 'photos';
 
 
 
