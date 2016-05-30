@@ -122,4 +122,101 @@ class DBObject {
 
 
 //--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work                Insert data into desired table
+     * @param array $rows   Associative array
+     * @return bool         Return true if succeed
+     */
+    public function insert_into_table($rows = array())
+    {
+        $new_row = [];
+        // check if given array is not empty
+        if(!empty($rows)){
+
+            // check if the given array is associative or not
+            if(Helper::isAssoc($rows)) {
+
+                // Getting the fields and the values
+                $fields = array_keys($rows);
+                $data = array_values($rows);
+
+
+                // cleaning data given by user
+                $new_row = $this->db->clean_array($data);
+
+                // Building query
+                $query = $this->db->insert_query($this->tableName, $fields, $new_row);
+            }
+
+            // If query execute return true, else false
+            if($this->db->custom_query($query))
+            {
+                return true;
+            } else {
+                return false;
+            }
+
+        }else{
+            // return false if the array is empty
+            return false;
+        }
+    }
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
+     * @work                Update the table by given values
+     * @param array $rows   Data array
+     * @param $field        Condition Field
+     * @param $id           Condition Id
+     * @return bool         Return true on success
+     */
+    public function update_table($rows = array(), $field, $id)
+    {
+        $id = $this->db->mysql_escape($id);
+
+        // check if given array is not empty
+        if(!empty($rows))
+        {
+            // check if the given array is associative or not
+            if(Helper::isAssoc($rows))
+            {
+
+                // Building Query
+                $query = $this->db->update_query($this->tableName, $rows, $field, $id);
+            }
+
+            // Check if the user exists before updating the table
+            if($this->data_exists($field, $id))
+            {
+                // If query execute return true, else false
+                if($this->db->custom_query($query))
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+        }
+        else
+        {
+            // return false if the array is empty
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------//
 }
