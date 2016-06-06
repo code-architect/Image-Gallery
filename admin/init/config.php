@@ -30,7 +30,8 @@ defined("CLASSES_DIR") || define("CLASSES_DIR", ROOT_PATH.DS."classes");
 // Pages Folder
 defined("PAGES_DIR") || define("PAGES_DIR", ROOT_PATH.DS."pages");
 
-
+// Images Folder
+defined("IMAGES_DIR") || define("IMAGES_DIR", realpath(__DIR__ .DS. '..'.DS.'..'.DS.'images') );
 
 //------------------------------------| Pages |---------------------------------------//
 

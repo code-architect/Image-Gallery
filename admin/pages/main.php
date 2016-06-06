@@ -66,13 +66,25 @@
 
 // Create user
 //$arr = [
-//    'user_name' => "Jenny",
+//    'user_name' => "Jonny",
 //    'user_password' => "123456",
 //    'user_email' => "abcx@xyz.com",
 //    'user_fname' => "jenny",
 //    'user_lname' => "doe",
 //    'user_is_admin' => "0"
 //];
+
+//$st = $app->user->insert_into_table($arr);
+//$st = $app->user->update_table($arr, 'user_id', 15);
+
+//$st = $app->photo->find_all();
+//echo "<pre>";
+//print_r($st);
+//echo "</pre>";
+//foreach($st as $ok){
+//    echo "<h2>".$ok->photo_title."</h2><br>";
+//    echo "<p>".$ok->photo_description."</p>";
+//}
 
 
 //$arr3 = [
@@ -213,6 +225,88 @@ print_r($arr4);
 //print_r($val);
 //echo "</pre>";
 
+
+if(isset($_POST['upload']))
+{
+//    echo "<pre>";
+//    print_r($_FILES['file_upload']);
+//    print_r($_POST);
+//    echo "</pre>";
+
+
+   $arr2 = [
+       'photo_title'        => $_POST['photo_title'],
+       'photo_description'  => $_POST['photo_description'],
+       'photo_filename'     => $_FILES['file_upload']['name'],
+       'photo_type'         => $_FILES['file_upload']['type'],
+       'photo_size'         => $_FILES['file_upload']['size'],
+   ];
+
+
+
+
+
+    echo "<pre>";
+    print_r($arr2);
+    echo "</pre>";
+
+
+
+//    $upload_error = [
+//        UPLOAD_ERR_OK 			=>	'There is no error, the file uploaded with success.',
+//        UPLOAD_ERR_INI_SIZE		=>	'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
+//        UPLOAD_ERR_FORM_SIZE	=>	'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
+//        UPLOAD_ERR_PARTIAL		=>	'The uploaded file was only partially uploaded.',
+//        UPLOAD_ERR_NO_FILE		=>	'No file was uploaded.',
+//        UPLOAD_ERR_NO_TMP_DIR	=>	'Missing a temporary folder',
+//        UPLOAD_ERR_CANT_WRITE	=>	'Failed to write file to disk.',
+//        UPLOAD_ERR_EXTENSION	=>	'A PHP extension stopped the file upload.'
+//    ];
+
+//    $temp_name = $_FILES['file_upload']['tmp_name'];
+//    $the_file = $_FILES['file_upload']['name'];
+//    $directory = "uploads/";
+//
+//    if(move_uploaded_file($temp_name, "$directory/$the_file"))
+//    {
+//        $the_message = "File Uploaded";
+//    } else{
+//        $the_error = $_FILES['file_upload']['error'];
+//        $the_message = $upload_error[$the_error];
+//    }
+
+
+
+
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document Upload</title>
+<head>
+<body>
+<form action="" method="post" enctype="multipart/form-data">
+
+    <h2>
+        <?php
+//        if(!empty($upload_error)){
+//            echo $the_message;
+//        }
+        ?>
+    </h2>
+    <input type="text" name="photo_title" placeholder="picture name"/><br>
+    <input type="text" name="photo_description" placeholder="description"/><br>
+
+    <input type="file" name="file_upload" />
+    <input type="submit" name="upload" />
+
+</form>
+
+
+</body>
+</html>
 
 
 

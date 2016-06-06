@@ -5,7 +5,7 @@ class DBObject {
 
     protected $tableName;             // Database table name
     protected $tableNameArray;        // table column name
-    protected $custom_error = [];     // errors array
+    protected $errors = [];     // errors array
 
     protected $db;                    // Database connection
 
