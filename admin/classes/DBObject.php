@@ -3,7 +3,10 @@
 
 class DBObject {
 
-    protected $tableName;
+    protected $tableName;             // Database table name
+    protected $tableNameArray;        // table column name
+    protected $custom_error = [];     // errors array
+
     protected $db;                    // Database connection
 
     public function __construct() {
@@ -148,6 +151,16 @@ class DBObject {
 
                 // Building query
                 $query = $this->db->insert_query($this->tableName, $fields, $new_row);
+            }
+            else
+            {
+                // If not associative array
+
+                $fields = $this->tableNameArray;
+                $data = $this->db->clean_array($rows);
+
+                // Building query
+                $query = $this->db->insert_query($this->tableName, $fields, $data);
             }
 
             // If query execute return true, else false
