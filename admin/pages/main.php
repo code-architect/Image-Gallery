@@ -237,17 +237,19 @@ if(isset($_POST['upload']))
    $arr2 = [
        'photo_title'        => $_POST['photo_title'],
        'photo_description'  => $_POST['photo_description'],
-       'photo_filename'     => $_FILES['file_upload']['name'],
-       'photo_type'         => $_FILES['file_upload']['type'],
-       'photo_size'         => $_FILES['file_upload']['size'],
    ];
 
-
-
+    if(isset($app->photo->errors))
+    {
+        print_r($app->photo->errors);
+    }
+    $feedback = $app->photo->set_file($_FILES['file_upload'], $arr2);
+    $ok = $app->photo->save(12);
 
 
     echo "<pre>";
-    print_r($arr2);
+    print_r($ok);
+    print_r($app->photo->errors);
     echo "</pre>";
 
 
