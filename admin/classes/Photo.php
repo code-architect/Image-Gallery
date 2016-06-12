@@ -92,7 +92,12 @@ class Photo extends DBObject {
 //--------------------------------------------------------------------------------------//
 
 
-
+    /**
+     * @work Saving data into the database based of if the data already exists in the database or not,
+     *       if exixts then update it, and if not create a new one.
+     * @param null $photo_id
+     * @return bool
+     */
     public function save($photo_id = null)
     {
         // if this id is present and its exists in the database do an update
@@ -126,6 +131,14 @@ class Photo extends DBObject {
                 return false;
             }
 
+            // check if the same named image exists or not
+            if($this->image_exists())
+            {
+                $this->errors[] = "This image already exists, change the name";
+                return false;
+            }
+
+
             // if uploading image is successful
             if(move_uploaded_file($this->tmp_file, IMAGES_DIR.DS.$this->name_file))
             {
@@ -148,9 +161,25 @@ class Photo extends DBObject {
 
 
 
+//--------------------------------------------------------------------------------------//
 
 
+    /**
+     * @work To check if the image with the same name exists or not
+     * @return bool
+     */
+    public function image_exists()
+    {
+        $data = $this->db->mysql_escape($this->photo_files['photo_filename']);
+        $query = "SELECT photo_id FROM ".$this->tableName." WHERE photo_filename = '".$data."'";
 
+        $result = $this->db->custom_query($query);
+        $num = $result->num_rows;
+        if($num > 0)
+        {
+            return true;
+        }
+    }
 
 
 
