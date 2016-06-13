@@ -291,13 +291,7 @@ if(isset($_POST['upload']))
 <body>
 <form action="" method="post" enctype="multipart/form-data">
 
-    <h2>
-        <?php
-//        if(!empty($upload_error)){
-//            echo $the_message;
-//        }
-        ?>
-    </h2>
+
     <input type="text" name="photo_title" placeholder="picture name"/><br>
     <input type="text" name="photo_description" placeholder="description"/><br>
 

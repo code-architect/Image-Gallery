@@ -12,6 +12,9 @@ class Photo extends DBObject {
     protected $error_file;
     protected $size_file;
 
+    // upload directory
+    public $upload_directory = "images";
+
     // post data array
     public $photo_files = [];
 
@@ -75,7 +78,7 @@ class Photo extends DBObject {
                     $this->photo_files = [
                     'photo_title'       =>  $post_value['photo_title'],
                     'photo_description' =>  $post_value['photo_description'],
-                    'photo_filename'    =>  substr($this->name_file, 0, strpos($this->name_file, ".")),
+                    'photo_filename'    =>  $this->name_file,
                     'photo_type'        =>  substr($this->type_file, 6),
                     'photo_size'        =>  $this->size_file
 
@@ -107,6 +110,7 @@ class Photo extends DBObject {
                 $this->update_table($this->photo_files, 'photo_id', $photo_id);
                 $this->errors[] = "Updated Successfully";
                 unset($this->photo_files);
+                unset($this->tmp_file);
                 return true;
             }
             else
@@ -147,6 +151,7 @@ class Photo extends DBObject {
                 {
                     $this->errors[] = "File Uploaded";
                     unset($this->photo_files);
+                    unset($this->tmp_file);
                     return true;
                 }
 
@@ -180,6 +185,12 @@ class Photo extends DBObject {
             return true;
         }
     }
+
+
+//--------------------------------------------------------------------------------------//
+
+
+
 
 
 
