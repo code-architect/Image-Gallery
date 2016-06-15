@@ -53,6 +53,27 @@ class Helper{
     }
 
 
+    /**
+     * @work Encode string
+     * @param $string
+     * @return string
+     */
+    public static function encode($string)
+    {
+        return $string = base64_encode($string);
+    }
+
+
+    /**
+     * @work Decode encoded string
+     * @param $string
+     * @return string
+     */
+    public static function decode($string)
+    {
+        return $string = base64_decode($string);
+    }
+
 
     /**
      * @work If there is not data in the data array return false
