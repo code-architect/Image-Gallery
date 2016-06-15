@@ -128,6 +128,24 @@ class DBObject {
 
 
     /**
+     * @work Delete files
+     * @param $fileName
+     * @return bool
+     */
+    public function delete_file($fileName)
+    {
+        if(unlink($fileName))
+        {
+            return true;
+        }
+    }
+
+
+
+//--------------------------------------------------------------------------------------//
+
+
+    /**
      * @work                Insert data into desired table
      * @param array $rows   Associative array
      * @return bool         Return true if succeed
