@@ -15,6 +15,7 @@ if(isset($_POST['upload']))
 {
     $postArray = [
         'photo_title'        => Helper::html_entity($_POST['photo_title']),
+        'photo_alt_text'     => Helper::html_entity($_POST['photo_alt_text']),
         'photo_description'  => Helper::html_entity($_POST['photo_description']),
     ];
 
@@ -49,6 +50,11 @@ echo $message ?>
             <div class="form-group">
                 <label for="photo_title">Image Title</label>
                 <input id="photo_title" name="photo_title" type="text" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="photo_alt_text">Alternate Text</label>
+                <input id="photo_alt_text" name="photo_alt_text" type="text" class="form-control" required>
             </div>
 
             <div class="form-group">

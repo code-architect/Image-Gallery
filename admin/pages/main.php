@@ -226,83 +226,13 @@ print_r($arr4);
 //echo "</pre>";
 
 
-if(isset($_POST['upload']))
-{
-//    echo "<pre>";
-//    print_r($_FILES['file_upload']);
-//    print_r($_POST);
-//    echo "</pre>";
-
-
-   $arr2 = [
-       'photo_title'        => $_POST['photo_title'],
-       'photo_description'  => $_POST['photo_description'],
-   ];
-
-    if(isset($app->photo->errors))
-    {
-        print_r($app->photo->errors);
-    }
-    $feedback = $app->photo->set_file($_FILES['file_upload'], $arr2);
-    $ok = $app->photo->save(12);
-
-
-    echo "<pre>";
-    print_r($ok);
-    print_r($app->photo->errors);
-    echo "</pre>";
-
-
-
-//    $upload_error = [
-//        UPLOAD_ERR_OK 			=>	'There is no error, the file uploaded with success.',
-//        UPLOAD_ERR_INI_SIZE		=>	'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
-//        UPLOAD_ERR_FORM_SIZE	=>	'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
-//        UPLOAD_ERR_PARTIAL		=>	'The uploaded file was only partially uploaded.',
-//        UPLOAD_ERR_NO_FILE		=>	'No file was uploaded.',
-//        UPLOAD_ERR_NO_TMP_DIR	=>	'Missing a temporary folder',
-//        UPLOAD_ERR_CANT_WRITE	=>	'Failed to write file to disk.',
-//        UPLOAD_ERR_EXTENSION	=>	'A PHP extension stopped the file upload.'
-//    ];
-
-//    $temp_name = $_FILES['file_upload']['tmp_name'];
-//    $the_file = $_FILES['file_upload']['name'];
-//    $directory = "uploads/";
-//
-//    if(move_uploaded_file($temp_name, "$directory/$the_file"))
-//    {
-//        $the_message = "File Uploaded";
-//    } else{
-//        $the_error = $_FILES['file_upload']['error'];
-//        $the_message = $upload_error[$the_error];
-//    }
 
 
 
 
-}
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Document Upload</title>
-<head>
-<body>
-<form action="" method="post" enctype="multipart/form-data">
 
-
-    <input type="text" name="photo_title" placeholder="picture name"/><br>
-    <input type="text" name="photo_description" placeholder="description"/><br>
-
-    <input type="file" name="file_upload" />
-    <input type="submit" name="upload" />
-
-</form>
-
-
-</body>
-</html>
 
 
 

@@ -23,7 +23,8 @@ $images = $app->photo->find_all();
                         <th>Photo</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Type</th>
+                        <th>Alternate Text</th>
+                        <th>Size</th>
                         <th><b>Edit</b></th>
                         <th><b>Delete</b></th>
                     </tr>
@@ -39,12 +40,13 @@ $images = $app->photo->find_all();
                         <?php $pic = "../".$app->photo->upload_directory."/".$image->photo_filename; ?>
 
                         <td><?php echo $image->photo_id; ?></td>
-                        <td><img src="<?php echo $pic; ?>" height="100" width="200"></td>
+                        <td><img src="<?php echo $pic; ?>" height="100" width="auto"></td>
                         <td><?php echo $image->photo_title; ?></td>
-                        <td><?php echo substr($image->photo_description, 0, 100)."[<br><b>click edit to read more<b/>]"; ?></td>
+                        <td><?php echo substr($image->photo_description, 0, 100)." <br><b>[click edit to read more]</b>"; ?></td>
+                        <td><?php echo $image->photo_alt_text; ?></td>
                         <td><?php echo number_format((float)($image->photo_size/1024), 2, '.', '')." KB"; ?></td>
 
-                        <td><a class="btn btn-primary">Edit</a></td>
+                        <td><a href="index.php?p=edit_image&id=<?php echo Helper::encode($image->photo_id); ?>" class="btn btn-primary">Edit</a></td>
                         <td>
                             <a class="btn btn-danger" onclick="return confirm('Are you sure?');"
                                href="pages/delete_image.php?id=<?php echo Helper::encode($image->photo_id); ?>

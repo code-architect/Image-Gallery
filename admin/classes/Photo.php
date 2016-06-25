@@ -7,7 +7,6 @@ class Photo extends DBObject {
 
     // file details
     protected $name_file;
-    protected $type_file;
     protected $tmp_file;
     protected $error_file;
     protected $size_file;
@@ -62,7 +61,6 @@ class Photo extends DBObject {
             // If everything is ok
             // setting the details of the file into protected properties
             $this->name_file =  basename($file['name']);
-            $this->type_file =  $file['type'];
             $this->tmp_file =   $file['tmp_name'];
             $this->error_file = $file['error'];
             $this->size_file =  $file['size'];
@@ -77,9 +75,9 @@ class Photo extends DBObject {
                 {
                     $this->photo_files = [
                     'photo_title'       =>  $post_value['photo_title'],
+                    'photo_alt_text'    =>  $post_value['photo_alt_text'],
                     'photo_description' =>  $post_value['photo_description'],
                     'photo_filename'    =>  $this->name_file,
-                    'photo_type'        =>  substr($this->type_file, 6),
                     'photo_size'        =>  $this->size_file
 
                     ];
@@ -97,7 +95,7 @@ class Photo extends DBObject {
 
     /**
      * @work Saving data into the database based of if the data already exists in the database or not,
-     *       if exixts then update it, and if not create a new one.
+     *       if exists then update it, and if not create a new one.
      * @param null $photo_id
      * @return bool
      */

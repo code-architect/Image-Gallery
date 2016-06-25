@@ -37,4 +37,4 @@ defined("IMAGES_DIR") || define("IMAGES_DIR", realpath(__DIR__ .DS. '..'.DS.'..'
 
 // Pages Array
 // register your site pages here
-$site_pages = ['main', 'comments', 'photos', 'upload', 'users'];
+$site_pages = ['main', 'comments', 'photos', 'upload', 'users', 'edit_image'];

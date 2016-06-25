@@ -16,6 +16,17 @@
 <!--        <li>-->
 <!--            <a href="index.php?p=comments"><i class="fa fa-fw fa-edit"></i> Comments</a>-->
 <!--        </li>-->
+        <?php
+        // removing edit pages from menu
+
+        foreach($site_pages AS $key => $value) {
+            if($value == 'edit_image') {
+                unset($site_pages[$key]);
+            }
+        }
+
+        ?>
+
         <?php foreach($site_pages as $page){ ?>
             <li
                 <?php
@@ -31,6 +42,9 @@
                 </a>
             </li>
         <?php } ?>
+        <?php
+        // adding it back
+        $site_pages[] = 'edit_image'; ?>
 
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
