@@ -206,7 +206,7 @@ class Database {
         foreach($array as $key => $value)
         {
             // escaping values and putting them in an array
-            $string[] = $key." = '".Helper::html_entity(Helper::escape_string($this->mysql_escape($value)))."'";
+            $string[] = $key." = '".$this->mysql_escape($value)."'";
         }
 
         $query .= implode(", ", $string);

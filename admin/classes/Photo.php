@@ -43,8 +43,9 @@ class Photo extends DBObject {
      * @return array
      */
 
-    public function set_file($file, $post = null)
+    public function set_file($post = null, $file)
     {
+
         // checking if there any file or its empty or it an array or not
         if (empty($file) || !$file || !is_array($file)) {
             $this->errors[] = "There is no file uploaded";
@@ -92,6 +93,32 @@ class Photo extends DBObject {
 
 //--------------------------------------------------------------------------------------//
 
+    /**
+     * @work IF only post array has been passed then only update this part
+     * @param null $post
+     */
+    public function set_only_files($post = null)
+    {
+        if($post != null)
+        {
+            // Cleaning the post data
+            $post_value = $this->db->clean_array($post);
+
+            // check if the values are set then create an array for later use
+
+                $this->photo_files = [
+                    'photo_title'       =>  $post_value['photo_title'],
+                    'photo_alt_text'    =>  $post_value['photo_alt_text'],
+                    'photo_description' =>  $post_value['photo_description']
+                ];
+
+        }
+    }
+
+
+
+//--------------------------------------------------------------------------------------//
+
 
     /**
      * @work Saving data into the database based of if the data already exists in the database or not,
@@ -104,12 +131,28 @@ class Photo extends DBObject {
         // if this id is present and its exists in the database do an update
         if($photo_id != null && $this->data_exists('photo_id', $photo_id)) {
 
-            if (isset($this->photo_files)) {
-                $this->update_table($this->photo_files, 'photo_id', $photo_id);
-                $this->errors[] = "Updated Successfully";
-                unset($this->photo_files);
-                unset($this->tmp_file);
-                return true;
+            if (isset($this->photo_files))
+            {
+                // if there is no image
+                if($this->tmp_file)
+                {
+                    if(move_uploaded_file($this->tmp_file, IMAGES_DIR.DS.$this->name_file))
+                    {
+                        $this->update_table($this->photo_files, 'photo_id', $photo_id);
+                        $this->errors[] = "Updated Successfully";
+                        unset($this->photo_files);
+                        unset($this->tmp_file);
+                        return true;
+                    }
+                }else
+                {
+                        $this->update_table($this->photo_files, 'photo_id', $photo_id);
+                        $this->errors[] = "Updated Successfully";
+                        unset($this->photo_files);
+                        unset($this->tmp_file);
+                        return true;
+                }
+
             }
             else
             {
