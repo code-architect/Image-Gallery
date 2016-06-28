@@ -6,6 +6,8 @@
         </h1>
     </div>
 </div>
+
+<script>tinymce.init({selector:'textarea'});</script>
 <!-- /.row -->
 
 
@@ -28,18 +30,44 @@ if(isset($_GET['id']))
 }
 
 // getting the values by id
+$message = '';
 $id = Helper::escape_string(Helper::decode($_GET['id']));
 $data = $app->photo->fetch_selected_column(["*"], "photo_id", "=", $id, 1);
+//---------------------------------------------------//
 
+// if there is a submit
 if(isset($_POST['submit']))
 {
+    $postArray = [
+        'photo_title'        => Helper::html_entity($_POST['photo_title']),
+        'photo_alt_text'     => Helper::html_entity($_POST['photo_alt_text']),
+        'photo_description'  => $_POST['photo_description']
+    ];
 
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    // if there is no file have been uploaded
+    if($_FILES['file_upload']['size'] == "0")
+    {
+        $app->photo->set_only_files($postArray);
+    } else
+    {
+        $app->photo->delete_file("../images/".$data->photo_filename);
+        $app->photo->set_file($postArray, $_FILES['file_upload']);
+    }
+
+
+    if($app->photo->save($id))
+    {
+        Helper::redirect("index.php?p=photos");
+    }
+    else
+    {
+        $message = "<div class='alert alert-danger'>".join("<br>", $app->photo->errors)."</div>";
+    }
+
 }
 
-
+// displaying messages
+echo $message;
 
 
 
@@ -65,11 +93,11 @@ if(isset($_POST['submit']))
 
             <div class="form-group">
                 <label for="photo_description">Image Description</label>
-                <textarea id="photo_description" name="photo_description" class="form-control" required><?php echo $data->photo_description; ?></textarea>
+                <textarea id="photo_description" name="photo_description" class="form-control" required><?php echo  htmlspecialchars_decode(htmlspecialchars_decode(html_entity_decode($data->photo_description))); ?></textarea>
             </div>
 
             <div class="form-group">
-                <input name="file_upload" type="file" required>
+                <input name="file_upload" type="file">
             </div>
 
             <div class="form-group">
@@ -85,15 +113,12 @@ if(isset($_POST['submit']))
                 </div>
                 <div class="inside">
                     <div class="box-inner">
-                        <p class="text">
-                            <img style="
-                                max-width: 100%;
-                                height: auto;
-                                width: auto\9;
-                                "
-                                src="../images/<?php echo $data->photo_filename; ?>">
 
+                        <p class="text">
+                            <img class="admin-photo-thumbnail" name="old_image"
+                                src="../images/<?php echo $data->photo_filename; ?>">
                         </p>
+
                     </div>
                 </div>
             </div>

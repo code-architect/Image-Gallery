@@ -23,6 +23,9 @@
             if($value == 'edit_image') {
                 unset($site_pages[$key]);
             }
+            if($value == 'edit_user') {
+                unset($site_pages[$key]);
+            }
         }
 
         ?>
@@ -44,7 +47,9 @@
         <?php } ?>
         <?php
         // adding it back
-        $site_pages[] = 'edit_image'; ?>
+        $site_pages[] = 'edit_image';
+        $site_pages[] = 'edit_user';
+        ?>
 
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>

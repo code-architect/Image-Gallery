@@ -34,6 +34,7 @@
 
     <!-- Custom CSS -->
     <link href="styles/css/sb-admin.css" rel="stylesheet">
+    <link href="styles/css/admin-style.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="styles/css/plugins/morris.css" rel="stylesheet">
@@ -47,6 +48,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="http://tinymce.cachefly.net/4.3/tinymce.min.js"></script>
+
 
 </head>
 

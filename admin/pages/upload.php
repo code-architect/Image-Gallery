@@ -16,11 +16,11 @@ if(isset($_POST['upload']))
     $postArray = [
         'photo_title'        => Helper::html_entity($_POST['photo_title']),
         'photo_alt_text'     => Helper::html_entity($_POST['photo_alt_text']),
-        'photo_description'  => Helper::html_entity($_POST['photo_description']),
+        'photo_description'  => $_POST['photo_description'],
     ];
 
     // Setting the values
-    $app->photo->set_file($_FILES['file_upload'], $postArray);
+    $app->photo->set_file($postArray, $_FILES['file_upload']);
 
     // saving the values
     if($app->photo->save())
