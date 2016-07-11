@@ -111,13 +111,13 @@ class Database {
             {
                 foreach($array as $key => $value)
                 {
-                    $clean_array[$key]  = Helper::html_entity(Helper::escape_string($this->mysql_escape($value)));
+                    $clean_array[$key]  = Helper::escape_string($this->mysql_escape($value));
                 }
             }
             else    // Do this if numeric array
             {
                 foreach ($array as $value) {
-                    $clean_array[] = Helper::html_entity(Helper::escape_string($this->mysql_escape($value)));
+                    $clean_array[] = Helper::escape_string($this->mysql_escape($value));
                 }
             }
         }

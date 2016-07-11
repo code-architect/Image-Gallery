@@ -92,6 +92,17 @@ class DBObject {
 
 //--------------------------------------------------------------------------------------//
 
+    /** Clean data and returns data
+     * @param $data
+     * @return string
+     */
+    public function clean_data($data)
+    {
+        $new_data = $this->db->mysql_escape($data);
+        return $new_data;
+    }
+
+//--------------------------------------------------------------------------------------//
 
     /**
      * @work                    Delete field
