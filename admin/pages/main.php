@@ -162,10 +162,14 @@ print_r($arr4);
 //    'this_is'   => "Not wanted",
 //    'also_not'  => "wanted ok"
 //];
-//
+//echo "<pre>";
+//print_r($arr);
+//echo "</pre>";
 //
 //$val = Helper::excluding_fields($arr, 'user_', ['user_id']);
-
+//echo "<pre>";
+//print_r($val);
+//echo "</pre>";
 //$arr2 = [
 //    "Jenny",
 //    "gslkg'nrs'",
