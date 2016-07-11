@@ -202,8 +202,22 @@ class User extends DBObject {
 
 //--------------------------------------------------------------------------------------//
 
-
-
+    /**
+     * @work Check if user data exists or not
+     * @param $field
+     * @param $email
+     * @return bool
+     */
+    public function check_user_data_exists($field, $email)
+    {
+        $query = "SELECT user_email from ".$this->tableName." WHERE user_email = '".$email."'";
+        $data = $this->db->custom_query($query);
+        if($data->num_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }
 
