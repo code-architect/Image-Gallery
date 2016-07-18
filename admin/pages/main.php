@@ -230,10 +230,25 @@ print_r($arr4);
 //echo "</pre>";
 
 
+//$arr = [
+//    'comm_id' => 1,
+//    'comm_author_id' => 5,
+//    'comm_body' => "bla bla bla",
+//    'comm_date' => '2017-12-12'
+//];
+//
+$arr2 = $app->comment->find_comments(5);
+echo "<pre>";
+print_r($arr2);
+echo "</pre>";
 
 
-
-
+//var_dump($app->comment->comment_exists(5));
+//
+//if($app->comment->comment_exists(5))
+//{
+//    echo "exists";
+//}
 
 ?>
 

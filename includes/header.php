@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php include("admin/init/autoload.php");
+
+$session = new Session();
+
+// to use all the instances
+$app = new Application();
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
