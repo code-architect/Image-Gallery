@@ -1,5 +1,6 @@
 <?php include("admin/init/autoload.php");
 
+// initiate session
 $session = new Session();
 
 // to use all the instances
