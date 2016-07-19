@@ -230,7 +230,17 @@ class Photo extends DBObject {
 
 //--------------------------------------------------------------------------------------//
 
-
+    /**
+     * Get all the images
+     * @param string $order ASC default
+     * @return array
+     */
+    public function find_all_images($order = 'asc', $field = 'photo_date')
+    {
+        $query = "SELECT * FROM ".$this->tableName." ORDER BY ".$field." ".$order;
+        $data = $this->db->execute_query($query);
+        return $data;
+    }
 
 
 
