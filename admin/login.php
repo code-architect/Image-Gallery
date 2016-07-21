@@ -38,7 +38,7 @@ if(isset($_POST['submit']))
 ?>
 <div class="col-lg-12">
 <div class="col-md-4 ">
-   <img src="styles/logo/logo.jpg">
+   <a href="../"><img src="styles/logo/logo.jpg"></a>
 </div>
 
 <div class="col-md-2 "></div>

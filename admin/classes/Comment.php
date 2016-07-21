@@ -16,6 +16,13 @@ class Comment extends DBObject
         {
             return false;
         }
+
+        // if inserted into table return true
+        if($this->insert_into_table($arr))
+        {
+            return true;
+        }
+
     }
 
 
