@@ -1,5 +1,46 @@
 <?php
 
+// If there is no id, redirect to index page
+if(!isset($_GET['id']))
+{
+    Helper::redirect('index.php');
+}
+
+// If id value is empty or white space
+if(empty($_GET['id']) || $_GET['id'] == " ")
+{
+    Helper::redirect('index.php');
+}
+
+// if there is id and if invalid redirect to index page
+if($_GET['id'])
+{
+    $id = base64_decode($app->photo->clean_data($_GET['id']));
+    if (!$app->photo->data_exists('photo_id', $id)) {
+        Helper::redirect('index.php');
+
+    }
+}
+
+// check if user is logged in or not
+$signed = "";
+if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true)
+{
+    $signed = true;
+}else{
+    $signed = false;
+}
+
+$photo = $app->photo->fetch_selected_column(["*"], "photo_id", "=", $id, 1);
+
+
+
+
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+
+
 if(isset($_POST['submit']))
 {
     echo "you have submitted<br>";
@@ -12,32 +53,28 @@ if(!isset($_SESSION['user_id']))
 ?>
 
 <?php
-$image = $app->photo->fetch_selected_column(["*"], "photo_id", "=", 5 , 1);
+
 ?>
     <!-- Blog Post -->
-    http://startbootstrap.com/
     <!-- Title -->
-    <h1><?php echo $image->photo_title ?></h1>
+    <h1><?php echo ucfirst($photo->photo_title); ?></h1>
 
     <!-- Author -->
-    <p class="lead">
-        by <a href="#">Start Bootstrap</a>
-    </p>
 
     <hr>
 
     <!-- Date/Time -->
-    <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $image->photo_date;  ?></p>
+    <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $photo->photo_date;  ?></p>
 
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-responsive" src="images/<?php echo $image->photo_filename ?>" alt="<?php echo $image->photo_alt_text ?>">
+    <img class="img-responsive" src="images/<?php echo $photo->photo_filename ?>" alt="<?php echo $photo->photo_alt_text ?>">
 
     <hr>
 
     <!-- Post Content -->
-    <p class="lead"><?php echo Helper::html_entity_decode($image->photo_description); ?></p>
+    <p class="lead"><?php echo Helper::html_entity_decode($photo->photo_description); ?></p>
 
     <hr>
 
@@ -46,10 +83,13 @@ $image = $app->photo->fetch_selected_column(["*"], "photo_id", "=", 5 , 1);
     <!-- Comments Form -->
 
     <div class="well">
+
+        <?php echo (($signed == true)? "" :"Please Login in to comment"); ?>
+
         <h4>Leave a Comment:</h4>
         <form action="" method="post" role="form">
             <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3" <?php echo (($signed == true) ? "": "disabled"); ?>></textarea>
             </div>
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -60,7 +100,7 @@ $image = $app->photo->fetch_selected_column(["*"], "photo_id", "=", 5 , 1);
 
 
 <?php
-$comments = $app->comment->find_comments($image->photo_id);
+$comments = $app->comment->find_comments($photo->photo_id);
 
 foreach($comments as $comment){
     ?>

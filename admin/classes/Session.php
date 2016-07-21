@@ -56,7 +56,7 @@ class Session{
         {
             $this->user_id = $_SESSION['user_id'] = $user->user_id;
             $_SESSION['is_admin'] = $user->user_is_admin;
-            $this->signed_in = true;
+            $_SESSION['signed_in'] = $this->signed_in = true;
         }
     }
 
@@ -70,6 +70,9 @@ class Session{
     public function logout()
     {
         unset($_SESSION['user_id']);
+        unset($_SESSION['signed_in']);
+        unset($_SESSION['is_admin']);
+
         unset($this->user_id);
         $this->signed_in = false;
         session_destroy();

@@ -6,4 +6,9 @@
 <?php include('includes/sidebar.php'); ?>
 <?php include('includes/footer.php'); ?>
 
-<?php // session_destroy(); ?>
+
+<?php
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
+// session_destroy(); ?>

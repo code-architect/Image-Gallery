@@ -216,6 +216,7 @@ class Photo extends DBObject {
      */
     public function image_exists()
     {
+
         $data = $this->db->mysql_escape($this->photo_files['photo_filename']);
         $query = "SELECT photo_id FROM ".$this->tableName." WHERE photo_filename = '".$data."'";
 
@@ -224,6 +225,8 @@ class Photo extends DBObject {
         if($num > 0)
         {
             return true;
+        }else{
+            return false;
         }
     }
 
@@ -243,6 +246,22 @@ class Photo extends DBObject {
     }
 
 
+//-------------------------------------------------------------------------------------//
 
+
+    public function image_id_exists($id)
+    {
+        $data = $this->db->mysql_escape($id);
+        $query = "SELECT photo_id FROM ".$this->tableName." WHERE photo_id  = ".$data;
+
+        $result = $this->db->custom_query($query);
+        $num = $result->num_rows;
+        if($num > 0)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }
