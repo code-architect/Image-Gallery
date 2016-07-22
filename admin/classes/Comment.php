@@ -94,7 +94,7 @@ class Comment extends DBObject
 
         // execute query and return data
         $data = $this->db->execute_query($sql);
-        return array_shift($data);
+        return $data;
     }
 
 
