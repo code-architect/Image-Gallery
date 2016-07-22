@@ -80,8 +80,22 @@ class Comment extends DBObject
 
 //-----------------------------------------------------------------------------------------------------//
 
+    /**
+     * Showing Comments on Comments page
+     * @return array
+     */
+    public function comments_on_admin_page()
+    {
+        $sql = "SELECT `comm_id`,`comm_image_id`,comm_author_id,
+                        (select photos.photo_title from photos where photos.photo_id = `comm_image_id`) as image_name,
+                        (select users.user_name from users where users.user_id =`comm_author_id`) as username,
+                        `comm_body`,`comm_date`
+                 from ".$this->tableName;
 
-
+        // execute query and return data
+        $data = $this->db->execute_query($sql);
+        return $data;
+    }
 
 
 
