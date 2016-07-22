@@ -24,7 +24,7 @@ $images = $app->photo->find_all();
                         <th>Title</th>
                         <th>Description</th>
                         <th>Alternate Text</th>
-                        <th>Size</th>
+                        <th>Comments</th>
                         <th><b>Edit</b></th>
                         <th><b>Delete</b></th>
                     </tr>
@@ -34,17 +34,23 @@ $images = $app->photo->find_all();
 
                     // setting the file delete paths
                     $file = "../../".$app->photo->upload_directory."/".$image->photo_filename;
+
                     ?>
 
                     <tr>
                         <?php $pic = "../".$app->photo->upload_directory."/".$image->photo_filename; ?>
 
                         <td><?php echo $image->photo_id; ?></td>
-                        <td><img class="photo-thumbnail" src="<?php echo $pic; ?>" height="100" width="auto"></td>
+                        <td>
+                            <img class="photo-thumbnail" src="<?php echo $pic; ?>" height="100" width="auto">
+                            <div class="fron_view">
+                                <a href="../photo.php?id=<?php echo base64_encode($image->photo_id); ?>">Blog View</a>
+                            </div>
+                        </td>
                         <td><?php echo $image->photo_title; ?></td>
                         <td><?php echo htmlspecialchars_decode(html_entity_decode(substr($image->photo_description, 0, 100)))." <br><b>[click edit to read more]</b>"; ?></td>
                         <td><?php echo $image->photo_alt_text; ?></td>
-                        <td><?php echo number_format((float)($image->photo_size/1024), 2, '.', '')." KB"; ?></td>
+                        <td><?php echo count($app->comment->fetch_selected_column(["*"], "comm_image_id", "=", $image->photo_id)); ?></td>
 
                         <td><a href="index.php?p=edit_image&id=<?php echo Helper::encode($image->photo_id); ?>" class="btn btn-primary">Edit</a></td>
                         <td>
