@@ -116,19 +116,28 @@ if(isset($_POST['submit']))
 <?php
 $comments = $app->comment->find_comments($photo->photo_id);
 
-foreach($comments as $comment){
-    ?>
-    <!-- Comment -->
-    <div class="media">
-        <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-        </a>
-        <div class="media-body">
-            <h4 class="media-heading"><a href="<?php echo $comment->user_id; ?>"><?php echo ucfirst($comment->user_name); ?></a>
-                <small><?php echo ($comment->comm_date); ?></small>
-            </h4>
-            <?php echo $comment->comm_body; ?>
+// if comment exists only the show this
+if($app->comment->comment_exists($photo->photo_id)) {
+    foreach ($comments as $comment) {
+        ?>
+        <!-- Comment -->
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="http://placehold.it/64x64" alt="">
+            </a>
+
+            <div class="media-body">
+                <h4 class="media-heading"><a
+                        href="<?php echo $comment->user_id; ?>"><?php echo ucfirst($comment->user_name); ?></a>
+                    <small><?php echo($comment->comm_date); ?></small>
+                </h4>
+                <?php echo $comment->comm_body; ?>
+            </div>
         </div>
-    </div>
-    <!-- Comment -->
-<?php } ?>
+        <!-- Comment -->
+<?php
+    }
+} else{
+    echo "<h2>No Comments</h2>";
+}
+?>
