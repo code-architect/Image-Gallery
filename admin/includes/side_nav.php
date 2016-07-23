@@ -26,6 +26,9 @@
             if($value == 'edit_user') {
                 unset($site_pages[$key]);
             }
+            if($value == 'photo_comment') {
+                unset($site_pages[$key]);
+            }
         }
 
         ?>
@@ -49,6 +52,8 @@
         // adding it back
         $site_pages[] = 'edit_image';
         $site_pages[] = 'edit_user';
+        $site_pages[] = 'photo_comment';
+
         ?>
 
         <li>

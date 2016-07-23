@@ -37,9 +37,9 @@ $comments = $app->comment->comments_on_admin_page();
 
                     <td><?php echo $comment->comm_id; ?></td>
 
-                    <td><a href="index.php?p=edit_image&id=<?php echo Helper::encode($comment->comm_image_id); ?>"><?php echo $comment->image_name; ?></a></td>
+                    <td><a href="index.php?p=photo_comment&image_id=<?php echo Helper::encode($comment->comm_image_id); ?>"><?php echo $comment->image_name; ?></a></td>
 
-                    <td><a href="index.php?p=edit_user&id=<?php echo Helper::encode($comment->comm_author_id); ?>"><?php echo $comment->username; ?></a></td>
+                    <td><?php echo $comment->username; ?></td>
 
                     <td><?php echo $comment->comm_body; ?></td>
 

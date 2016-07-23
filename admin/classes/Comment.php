@@ -63,7 +63,8 @@ class Comment extends DBObject
         // if there comments exists for this image get comments else return false
         if($this->comment_exists($photo_id))
         {
-            $sql = "SELECT c.comm_id, c.comm_author_id, c.comm_body, c.comm_date, u.user_name, u.user_id ";
+            $sql = "SELECT c.comm_id, c.comm_author_id, c.comm_image_id, c.comm_body, c.comm_date, u.user_name, u.user_id,
+                    u.user_fname, u.user_lname, u.user_email ";
             $sql .= "from " . $this->tableName . " as c INNER JOIN users as u ";
             $sql .= "where c.comm_author_id = u.user_id ";
             $sql .= "AND c.comm_image_id = " . $photo_id;
