@@ -50,6 +50,9 @@
     <![endif]-->
     <script src="http://tinymce.cachefly.net/4.3/tinymce.min.js"></script>
 
+    <!-- Google charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 
 </head>
 
