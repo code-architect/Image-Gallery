@@ -4,12 +4,14 @@ class Session{
 
     private $signed_in = false;
     public $user_id;
+    public $count;
 
 
 
     public function __construct()
     {
         $this->check_login();
+        $this->visitorCount();
     }
 
 
@@ -79,6 +81,18 @@ class Session{
     }
 //--------------------------------------------------------------------------------------//
 
+    public function visitorCount()
+    {
+        if(isset($_SESSION['count']))
+        {
+            return $this->count = $_SESSION['count']++;
+        } else
+        {
+            return $_SESSION['count'] = 1;
+        }
+    }
+
+//--------------------------------------------------------------------------------------//
 
 }
 

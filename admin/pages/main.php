@@ -24,8 +24,8 @@
                         <i class="fa fa-comments fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">26</div>
-                        <div>New Comments!</div>
+                        <div class="huge"><?php echo $session->visitorCount(); ?></div>
+                        <div>Page Views!</div>
                     </div>
                 </div>
             </div>
@@ -111,6 +111,11 @@
     <div id="piechart" style="width: 900px; height: 500px;"></div>
 </div>
 
+<?php
+
+$data = $app->photo->count_all();
+echo "<pre>"; print_r($data);
 
 
+?>
 

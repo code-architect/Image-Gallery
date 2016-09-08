@@ -254,10 +254,16 @@ class DBObject {
 
 
 
+//--------------------------------------------------------------------------------------//
 
 
-
-
+    // Count all data
+    public function count_all()
+    {
+        $query = "SELECT COUNT(*) as total FROM ".$this->tableName;
+        $data = $this->db->execute_query($query);
+        return $data;
+    }
 
 
 //--------------------------------------------------------------------------------------//

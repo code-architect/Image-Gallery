@@ -19,7 +19,7 @@ try {
             <img class="img-responsive" src="images/<?php echo $image->photo_filename ?>" alt="<?php echo $image->photo_alt_text ?>">
         </a>
         <h3>
-            <a href="photo.php?id=<?php echo base64_encode($image->photo_id); ?>">Project Name</a>
+            <a href="photo.php?id=<?php echo base64_encode($image->photo_id); ?>"><?php echo $image->photo_title; ?></a>
         </h3>
     </div>
 

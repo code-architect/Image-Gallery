@@ -105,7 +105,7 @@ if(isset($_POST['submit']))
             <div class="form-group">
                 <textarea name="comm_body" class="form-control" rows="3" <?php echo (($signed == true) ? "": "disabled"); ?>></textarea>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="submit" class="btn btn-primary" <?php echo (($signed == true) ? "": "disabled"); ?>>Submit</button>
         </form>
     </div>
 
