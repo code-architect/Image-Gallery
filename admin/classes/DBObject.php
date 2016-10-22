@@ -261,8 +261,9 @@ class DBObject {
     public function count_all()
     {
         $query = "SELECT COUNT(*) as total FROM ".$this->tableName;
-        $data = $this->db->execute_query($query);
-        return $data;
+        $data = $this->db->query($query);
+        $data = mysqli_fetch_assoc($data);
+        return array_shift($data);
     }
 
 
