@@ -67,7 +67,8 @@ if(isset($_POST['submit']))
 }
 
 ?>
-
+<!-- Blog Post Content Column -->
+<div class="col-lg-8">
     <?php echo $message; ?>
     <!-- Blog Post -->
     <!-- Title -->

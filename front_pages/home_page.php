@@ -6,9 +6,10 @@ try {
 {
     include_once('404.php');
 }
+/*
 ?>
-
-
+<!-- Blog Post Content Column -->
+<div class="col-lg-12">
 <!-- Projects Row -->
 <div class="row">
     <?php foreach($images as $image){ ?>
@@ -23,9 +24,36 @@ try {
         </h3>
     </div>
 
-
     <?php } ?>
-</div>
+
+</div> <?php */ ?>
 <!-- /.row -->
+
+
+
+        <!-- Slider -->
+        <div class="row">
+            <div class="col-sm-12" id="slider-thumbs">
+                <!-- Bottom switcher of slider -->
+                <ul class="hide-bullets">
+                    <div class="thumbnails row">
+
+                    <?php foreach($images as $image){ ?>
+
+                        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <a class="thumbnail" href="photo.php?id=<?php echo base64_encode($image->photo_id); ?>">
+                                <img class="img-responsive home_page_photo" src="images/<?php echo $image->photo_filename; ?>" alt="<?php echo $image->photo_alt_text; ?>">
+                            </a>
+                        </div>
+
+                    <?php } ?>
+                    </div>
+                </ul>
+            </div>
+
+            <!--/Slider-->
+        </div>
+
+
 
 

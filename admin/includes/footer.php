@@ -17,15 +17,19 @@
 
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      20],
-            ['Commute',  2],
-            ['Watch TV', 2],
+            ['No. of Comments', <?php echo $app->comment->count_all(); ?>],
+            ['No. of Users',  <?php echo $app->user->count_all(); ?>],
+            ['No. of Images', <?php echo $app->photo->count_all(); ?>],
             ['Sleep',    7]
         ]);
 
         var options = {
+            legend:'none',
+            pieSliceText:'label',
+            backgroundColor: 'transparent',
             title: 'My Daily Activities'
+
+
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

@@ -96,5 +96,5 @@ class Session{
 
 }
 
-$session = new Session();
+//$session = new Session();
 

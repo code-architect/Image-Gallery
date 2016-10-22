@@ -27,6 +27,7 @@ $app = new Application();
 
     <!-- Custom CSS -->
     <link href="admin/styles/css/blog-post.css" rel="stylesheet">
+    <link href="admin/styles/css/plugins/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

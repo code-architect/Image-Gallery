@@ -24,12 +24,12 @@
                         <i class="fa fa-comments fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge"><?php echo $session->visitorCount(); ?></div>
-                        <div>Page Views!</div>
+                        <div class="huge"><?php echo $app->comment->count_all(); ?></div>
+                        <div>No. of comments!</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="index.php?p=comments">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -46,12 +46,12 @@
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
-                        <div>New Tasks!</div>
+                        <div class="huge"><?php echo $app->photo->count_all(); ?></div>
+                        <div>No. of Images</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="index.php?p=photos">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -65,15 +65,15 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-shopping-cart fa-5x"></i>
+                        <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">124</div>
-                        <div>New Orders!</div>
+                        <div class="huge"><?php echo $app->user->count_all(); ?></div>
+                        <div>No. of Users</div>
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="index.php?p=users">
                 <div class="panel-footer">
                     <span class="pull-left">View Details</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -113,9 +113,7 @@
 
 <?php
 
-$data = $app->photo->count_all();
-echo "<pre>"; print_r($data);
-
+echo $session->visitorCount();
 
 ?>
 
