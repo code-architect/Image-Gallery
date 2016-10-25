@@ -2,3 +2,25 @@
     width: 200px !important;
     height: 130px !important;
 }
+
+/********************************/
+.pager .next a{
+    background-color: black;
+    color: aquamarine;
+}
+
+.pager .next a:hover{
+    background-color: black;
+    color: aquamarine;
+}
+
+.pager .previous a{
+    background-color: black;
+    color: aquamarine;
+}
+
+.pager .previous a:hover{
+    background-color: black;
+    color: aquamarine;
+}
+
