@@ -66,6 +66,15 @@ class Pagination extends DBObject{
     }
 
 //--------------------------------------------------------------------------------------------------------------------//
+
+    public function front_page_images_to_show($order = 'asc', $field = 'photo_date')
+    {
+        $sql = "SELECT * FROM photos ORDER BY ".$field." ".$order." LIMIT ".$this->items_per_page;
+        $sql .= " OFFSET ".$this->offset();
+
+        return $data = $this->db->execute_query($sql);
+    }
+
 //--------------------------------------------------------------------------------------------------------------------//
 //--------------------------------------------------------------------------------------------------------------------//
 }
